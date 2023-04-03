@@ -1,0 +1,84 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GraphicsEditor.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GraphicsEditor.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="GraphicsEditor">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<DockPanel Grid.Row="0">
+			<Menu DockPanel.Dock="Top">
+				<MenuItem Name="menuExport" Header="Экспортировать">
+					<MenuItem Header="Экспортировать в PNG" Click="SaveFileDialogMenuPngClick"/>
+					<MenuItem Header="Экспортировать в JSON" Click="SaveFileDialogMenuJsonClick"/>
+					<MenuItem Header="Экспортировать в XML" Click="SaveFileDialogMenuXmlClick"/>
+				</MenuItem>
+				<MenuItem Name="menuImport" Header="Импортировать">
+					<MenuItem Header="Импортировать в JSON" Click="OpenFileDialogMenuJsonClick"/>
+					<MenuItem Header="Импортировать в XML" Click="OpenFileDialogMenuXmlClick"/>
+				</MenuItem>
+			</Menu>
+		</DockPanel>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="400"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="200"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Border Grid.Column="0" BorderBrush="Black" BorderThickness="2">
+				<Grid RowDefinitions="30 * 30">
+					<ComboBox Name="comboBoxShape" SelectedIndex="{Binding FigureIndex}" HorizontalAlignment="Stretch" Grid.Row="0">
+						<ComboBoxItem Content="Прямая линия"/>
+						<ComboBoxItem Content="Ломаная линия"/>
+						<ComboBoxItem Content="Многоугольник"/>
+						<ComboBoxItem Content="Прямоугольник"/>
+						<ComboBoxItem Content="Эллипс"/>
+						<ComboBoxItem Content="Составная фигура"/>
+					</ComboBox>
+					<ContentControl Grid.Row="1" Content="{Binding Content}"/>
+					<Grid Grid.Row="2" ColumnDefinitions="*, *">
+						<Button Name="buttonAdd" Grid.Column="0" Content="Добавить" Command="{Binding AddFigure}" HorizontalAlignment="Stretch"
+								HorizontalContentAlignment="Center"/>
+						<Button Name="buttonClear" Grid.Column="1" Content="Сброс" Command="{Binding ClearParam}" HorizontalAlignment="Stretch"
+								HorizontalContentAlignment="Center"/>
+					</Grid>
+				</Grid>
+			</Border>
+			<Border Grid.Column="1" BorderBrush="Black" BorderThickness="2">
+				<ItemsControl DragDrop.AllowDrop="True" Items="{Binding Shapes}" PointerPressed="PointerPressedOnCanvas">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas Name="canvas" Width="{Binding $parent[Border].Width}" Height="{Binding $parent[Border].Height}"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+			</Border>
+			<Border Grid.Column="2" BorderBrush="Black" BorderThickness="2">
+				<ListBox Name="listBoxShapes" Items="{Binding FigureList}" SelectedIndex="{Binding FigureListIndex}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Grid ColumnDefinitions="*, 48">
+								<TextBlock Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+								<Button Name="buttonDeleteShape" Grid.Column="1" Click="DeleteShape">
+									<Image Source="/Assets/basket.png"/>
+								</Button>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Border>
+		</Grid>
+	</Grid>
+
+</Window>

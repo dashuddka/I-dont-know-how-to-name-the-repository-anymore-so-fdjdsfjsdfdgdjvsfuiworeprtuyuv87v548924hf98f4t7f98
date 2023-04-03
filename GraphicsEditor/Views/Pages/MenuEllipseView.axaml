@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GraphicsEditor.Views.Pages.MenuEllipseView">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+			<RowDefinition Height="30"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="1.5*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment ="Center"  Margin="10" Text="Имя:"/>
+		<TextBox Name="textBoxName" Grid.Row="0" Grid.Column="1" VerticalAlignment ="Center" Margin="10" Text="{Binding Name}"/>
+		<TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Начальная точка:"/>
+		<TextBox Name="textBoxStart" Grid.Row="1" Grid.Column="1" VerticalAlignment ="Center" Margin="10" Text="{Binding StartPoint}"/>
+		<TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Ширина:"/>
+		<TextBox Name="textBoxWidth" Grid.Row="2" Grid.Column="1" VerticalAlignment ="Center" Margin="10" Text="{Binding Width}"/>
+		<TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Высота:"/>
+		<TextBox Name="textBoxHeight" Grid.Row="3" Grid.Column="1" VerticalAlignment ="Center" Margin="10" Text="{Binding Height}"/>
+		<TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Цвет линии:"/>
+		<ComboBox Grid.Row="4" Grid.Column="1" VerticalAlignment ="Center" Margin="10" HorizontalAlignment="Center" Name="comboBoxColor" Items="{Binding Colors}" SelectedIndex="{Binding StrokeNum}">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<Rectangle Width="200" Height="13" Fill="{Binding}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+		<TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Толщина линии:"/>
+		<NumericUpDown Name="numericUpDownStroke" Grid.Row="5" Grid.Column="1" Minimum="1" Value="{Binding ThicknessLine}" Width="218" Height="10"/>
+		<TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Цвет заливки:"/>
+		<ComboBox Grid.Row="6" Grid.Column="1" VerticalAlignment ="Center" Margin="10" HorizontalAlignment="Center" Name="comboBoxFillColor" Items="{Binding Colors}" SelectedIndex="{Binding FillNum}">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<Rectangle Width="200" Height="13" Fill="{Binding}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+		<TextBlock Grid.Row="7" Grid.Column="0" VerticalAlignment ="Center" Margin="10" Text="Центр поворота:"/>
+		<TextBox Name="textBoxRotateCenter" Grid.Row="7" Grid.Column="1" VerticalAlignment ="Center" Margin="10" Text="{Binding Center}"/>
+		<TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment ="Center"  Margin="10" Text="Угол поворота:"/>
+		<TextBox Name="textBoxRenderTransformAngle" Grid.Row="8" Grid.Column="1" VerticalAlignment ="Center"  Margin="10" Text="{Binding Rotate}"/>
+		<TextBlock Grid.Row="9" Grid.Column="0" VerticalAlignment ="Center"  Margin="10" Text="Масштабирование:"/>
+		<TextBox Name="textBoxScaleTransform" Grid.Row="9" Grid.Column="1" VerticalAlignment ="Center"  Margin="10" Text="{Binding Scale}"/>
+		<TextBlock Grid.Row="10" Grid.Column="0" VerticalAlignment ="Center"  Margin="10" Text="Наклон:"/>
+		<TextBox Name="textBoxSkewTransform" Grid.Row="10" Grid.Column="1" VerticalAlignment ="Center"  Margin="10" Text="{Binding Skew}"/>
+	</Grid>
+</UserControl>
